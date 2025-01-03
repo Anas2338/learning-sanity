@@ -1,6 +1,13 @@
 import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 
+interface item {
+  ProductName: string,
+  ProductPrice: number,
+  imageUrl: string,
+  _id: string,
+}
+
 export default async function Home (){
   const data = await client.fetch(`*[_type == "product"] {
     ProductName,
@@ -11,7 +18,7 @@ export default async function Home (){
   return(
     <div className="flex justify-evenly mt-5">
       {
-        data.map((elem:any)=>{
+        data.map((elem:item)=>{
           return(
             <div className="flex flex-col-reverse" key={elem._id}>
               <div>
